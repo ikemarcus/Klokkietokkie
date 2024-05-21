@@ -94,7 +94,7 @@ label {
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
     .container {
         padding: 15px;
         border-radius: 0; /* Border-radius verwijderd voor mobiele weergave */
