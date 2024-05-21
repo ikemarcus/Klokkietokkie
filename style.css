@@ -26,7 +26,6 @@ body.weekend-excluded {
     text-align: center;
     background: rgba(255, 255, 255, 0.9);
     padding: 30px;
-    border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     max-width: 600px;
     width: 100%;
@@ -63,7 +62,8 @@ label {
 
 #countdown {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -71,9 +71,9 @@ label {
     background: #6a82fb;
     color: #fff;
     padding: 20px;
-    border-radius: 10px;
     width: 100px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Border-radius alleen toegepast op de time-box klasse */
 }
 
 .time-box.weekend-excluded {
@@ -86,6 +86,10 @@ label {
     margin-bottom: 5px;
 }
 
+.time-box .milliseconds {
+    font-size: 0.8rem;
+}
+
 #quote {
     margin-top: 20px;
     font-size: 1.5rem;
@@ -94,12 +98,20 @@ label {
 }
 
 @media (max-width: 600px) {
+    .container {
+        padding: 15px;
+        border-radius: 0; /* Border-radius verwijderd voor mobiele weergave */
+    }
     .time-box {
         width: 60px;
         padding: 10px;
     }
     .time-box span {
         font-size: 1.5rem;
+    }
+    .time-box .milliseconds {
+        position: relative;
+        top: -10px;
     }
     h1 {
         font-size: 1.5rem;
