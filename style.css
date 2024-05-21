@@ -52,6 +52,10 @@ input[type="checkbox"] {
     accent-color: #6a82fb; /* Styling voor checkbox */
 }
 
+input[type="checkbox"].weekend-excluded {
+    accent-color: #ff7e5f; /* Styling voor checkbox als weekends uitgesloten zijn */
+}
+
 label {
     font-size: 1.2rem;
     color: #333;
@@ -72,10 +76,21 @@ label {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
+.time-box.weekend-excluded {
+    background: #ff7e5f;
+}
+
 .time-box span {
     display: block;
     font-size: 2.5rem;
     margin-bottom: 5px;
+}
+
+#quote {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #333;
+    font-style: italic;
 }
 
 @media (max-width: 600px) {
