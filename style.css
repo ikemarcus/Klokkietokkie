@@ -103,7 +103,7 @@ label {
         border-radius: 0; /* Border-radius verwijderd voor mobiele weergave */
     }
     .time-box {
-        width: 60px;
+        width: 100px;
         padding: 10px;
     }
     .time-box span {
@@ -112,7 +112,7 @@ label {
     .time-box .milliseconds {
         position: relative;
         top: -10px;
-    }
+0    }
     h1 {
         font-size: 1.5rem;
     }
