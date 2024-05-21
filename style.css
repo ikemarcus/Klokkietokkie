@@ -16,6 +16,12 @@ body {
     100% { background-position: 0% 50%; }
 }
 
+body.weekend-excluded {
+    background: linear-gradient(270deg, #ff5f6d, #ffc371, #ff7e5f, #feb47b);
+    background-size: 800% 800%;
+    animation: gradientAnimation 60s ease infinite;
+}
+
 .container {
     text-align: center;
     background: rgba(255, 255, 255, 0.9);
