@@ -1,6 +1,26 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const excludeWeekendsCheckbox = document.getElementById('exclude-weekends');
-    let interval; // Interval variabele buiten de functies gedeclareerd
+    const quoteContainer = document.getElementById('quote'); // Element to display the quote
+    let interval; // Interval variable declared outside the functions
+
+    // Array of motivational quotes
+    const quotes = [
+        "Je kan het! ~ Ike",
+        "Ik geloof in je! ~ Ike",
+        "Love you! ~ Ike",
+        "Ga ervoor! ~ Ike",
+        "Je bent geweldig! ~ Ike",
+        "Hou vol! ~ Ike",
+        "Trots op je! ~ Ike",
+        "Fantastisch werk! ~ Ike",
+        "Doe je best! ~ Ike"
+    ];
+
+    // Function to display a random quote
+    function displayRandomQuote() {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        quoteContainer.innerText = quotes[randomIndex];
+    }
 
     function updateCountdown() {
         const targetDate = new Date('2024-06-26T15:00:00');
@@ -57,7 +77,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         interval = setInterval(updateCountdown, 10);
         updateCountdown();
 
-        // Voeg klasse toe of verwijder klasse afhankelijk van de checkbox status
+        // Add or remove class depending on checkbox status
         if (excludeWeekendsCheckbox.checked) {
             document.body.classList.add('weekend-excluded');
         } else {
@@ -67,4 +87,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     interval = setInterval(updateCountdown, 10);
     updateCountdown(); // Initial call to set the countdown immediately
+
+    displayRandomQuote(); // Display a random quote when the page loads
 });
