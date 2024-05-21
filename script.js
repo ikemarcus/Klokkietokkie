@@ -1,13 +1,16 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const excludeWeekendsCheckbox = document.getElementById('exclude-weekends');
+    let interval; // Interval variabele buiten de functies gedeclareerd
 
     function updateCountdown() {
         const targetDate = new Date('2024-06-26T15:00:00');
         const now = new Date();
-        let difference = targetDate - now;
+        let difference;
 
         if (excludeWeekendsCheckbox.checked) {
             difference = calculateDifferenceExcludingWeekends(now, targetDate);
+        } else {
+            difference = targetDate - now;
         }
 
         if (difference > 0) {
@@ -41,13 +44,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
 
         // Correct for the last partial day
-        const endOfLastFullDay = new Date(start.getFullYear(), start.getMonth(), start.getDate() + Math.floor(totalMilliseconds / (24 * 60 * 60 * 1000)), 0, 0, 0, 0);
-        totalMilliseconds += Math.max(0, end - endOfLastFullDay);
+        const remainingTime = end - new Date(current.setDate(current.getDate() - 1));
+        if (new Date(current).getDay() !== 0 && new Date(current).getDay() !== 6) {
+            totalMilliseconds += remainingTime;
+        }
 
         return totalMilliseconds;
     }
 
-    excludeWeekendsCheckbox.addEventListener('change', updateCountdown);
+    excludeWeekendsCheckbox.addEventListener('change', () => {
+        clearInterval(interval);
+        interval = setInterval(updateCountdown, 10);
+        updateCountdown();
+    });
 
-    const interval = setInterval(updateCountdown, 1);
+    interval = setInterval(updateCountdown, 10);
+    updateCountdown(); // Initial call to set the countdown immediately
 });
