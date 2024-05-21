@@ -56,6 +56,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
         clearInterval(interval);
         interval = setInterval(updateCountdown, 10);
         updateCountdown();
+
+        // Voeg klasse toe of verwijder klasse afhankelijk van de checkbox status
+        if (excludeWeekendsCheckbox.checked) {
+            document.body.classList.add('weekend-excluded');
+        } else {
+            document.body.classList.remove('weekend-excluded');
+        }
     });
 
     interval = setInterval(updateCountdown, 10);
