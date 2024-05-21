@@ -93,23 +93,13 @@ label {
     font-style: italic;
 }
 
-
-@media (max-width: 800px) {
-    .container {
-        padding: 15px;
-        width: auto;
-        border-radius: 0; /* Border-radius verwijderd voor mobiele weergave */
-    }
+@media (max-width: 600px) {
     .time-box {
-        width: 100px;
+        width: 60px;
         padding: 10px;
     }
     .time-box span {
         font-size: 1.5rem;
-    }
-    .time-box .milliseconds {
-        position: relative;
-        top: -10px;
     }
     h1 {
         font-size: 1.5rem;
