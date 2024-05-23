@@ -3,22 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aftellen naar Tom's Stage Eind</title>
+    <title>Aftellen naar het einde van Ike's stage</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Aftellen naar het einde van Tom's stage</h1>
+        <h1 id="countdown-title">Aftellen naar het einde van Tom's stage</h1>
         <div class="checkbox-container">
             <input type="checkbox" id="exclude-weekends">
             <label for="exclude-weekends">Exclusief weekendagen</label>
         </div>
-        <div id="countdown">
-            <div class="time-box"><span id="days"></span>dagen</div>
-            <div class="time-box"><span id="hours"></span>uren</div>
-            <div class="time-box"><span id="minutes"></span>minuten</div>
-            <div class="time-box"><span id="seconds"></span>seconden</div>
-            <div class="time-box"><span id="milliseconds"></span>milliseconden</div>
+        <div id="carousel">
+            <div class="countdown-container" id="countdown-1">
+                <div class="time-box"><span id="days-1"></span>dagen</div>
+                <div class="time-box"><span id="hours-1"></span>uren</div>
+                <div class="time-box"><span id="minutes-1"></span>minuten</div>
+                <div class="time-box"><span id="seconds-1"></span>seconden</div>
+                <div class="time-box"><span id="milliseconds-1"></span>milliseconden</div>
+            </div>
+            <div class="countdown-container" id="countdown-2">
+                <div class="time-box"><span id="days-2"></span>dagen</div>
+                <div class="time-box"><span id="hours-2"></span>uren</div>
+                <div class="time-box"><span id="minutes-2"></span>minuten</div>
+                <div class="time-box"><span id="seconds-2"></span>seconden</div>
+                <div class="time-box"><span id="milliseconds-2"></span>milliseconden</div>
+            </div>
+        </div>
+        <div class="navigation">
+            <button id="prev">&#9664;</button>
+            <button id="next">&#9654;</button>
         </div>
         <div id="quote" class="quote"></div> <!-- Element to display the quote -->
     </div>

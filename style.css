@@ -61,19 +61,37 @@ label {
     color: #333;
 }
 
-#countdown {
-    display: flex;
-    justify-content: space-around;
+#carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.countdown-container {
+    display: none;
     gap: 10px;
+}
+
+.navigation {
+    padding-top: 15px;
+}
+
+.countdown-container.active {
+    display: flex;
+    justify-content: space-between;
 }
 
 .time-box {
     background: #6a82fb;
     color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     width: 100px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .time-box.weekend-excluded {
@@ -81,9 +99,8 @@ label {
 }
 
 .time-box span {
-    display: block;
-    font-size: 2.5rem;
-    margin-bottom: 5px;
+    font-size: 1.5rem;
+    margin: 0;
 }
 
 #quote {
@@ -91,6 +108,21 @@ label {
     font-size: 1.5rem;
     color: #333;
     font-style: italic;
+}
+
+.navigation button {
+    font-size: 2rem;
+    background: transparent;
+    color: #6a82fb;
+    border: none;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.navigation button:hover {
+    color: #ff7e5f;
 }
 
 @media (max-width: 600px) {

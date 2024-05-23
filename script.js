@@ -1,9 +1,9 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     const excludeWeekendsCheckbox = document.getElementById('exclude-weekends');
-    const quoteContainer = document.getElementById('quote'); // Element to display the quote
-    let interval; // Interval variable declared outside the functions
+    const quoteContainer = document.getElementById('quote');
+    let interval;
+    let activeCountdown = 1;
 
-    // Array of motivational quotes
     const quotes = [
         "Je kan het! ~ Ike",
         "Ik geloof in je! ~ Ike",
@@ -16,14 +16,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         "Doe je best! ~ Ike"
     ];
 
-    // Function to display a random quote
     function displayRandomQuote() {
         const randomIndex = Math.floor(Math.random() * quotes.length);
         quoteContainer.innerText = quotes[randomIndex];
     }
 
-    function updateCountdown() {
-        const targetDate = new Date('2024-06-26T15:00:00');
+    function updateCountdown(targetDate, elements) {
         const now = new Date();
         let difference;
 
@@ -40,14 +38,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
             const milliseconds = difference % 1000;
 
-            document.getElementById('days').innerText = days;
-            document.getElementById('hours').innerText = hours;
-            document.getElementById('minutes').innerText = minutes;
-            document.getElementById('seconds').innerText = seconds;
-            document.getElementById('milliseconds').innerText = milliseconds;
+            elements.days.innerText = days;
+            elements.hours.innerText = hours;
+            elements.minutes.innerText = minutes;
+            elements.seconds.innerText = seconds;
+            elements.milliseconds.innerText = milliseconds;
         } else {
             clearInterval(interval);
-            document.getElementById('countdown').innerText = 'Tom is klaar met zijn stage!';
+            elements.days.innerText = 0;
+            elements.hours.innerText = 0;
+            elements.minutes.innerText = 0;
+            elements.seconds.innerText = 0;
+            elements.milliseconds.innerText = 0;
         }
     }
 
@@ -57,13 +59,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         while (current < end) {
             let day = current.getDay();
-            if (day !== 0 && day !== 6) { // Exclude Sundays (0) and Saturdays (6)
-                totalMilliseconds += 24 * 60 * 60 * 1000; // Add one day in milliseconds
+            if (day !== 0 && day !== 6) {
+                totalMilliseconds += 24 * 60 * 60 * 1000;
             }
             current.setDate(current.getDate() + 1);
         }
 
-        // Correct for the last partial day
         const remainingTime = end - new Date(current.setDate(current.getDate() - 1));
         if (new Date(current).getDay() !== 0 && new Date(current).getDay() !== 6) {
             totalMilliseconds += remainingTime;
@@ -72,12 +73,51 @@ document.addEventListener('DOMContentLoaded', (event) => {
         return totalMilliseconds;
     }
 
-    excludeWeekendsCheckbox.addEventListener('change', () => {
+    function startCountdown() {
         clearInterval(interval);
-        interval = setInterval(updateCountdown, 10);
-        updateCountdown();
+        interval = setInterval(() => {
+            updateCountdown(new Date('2024-06-26T15:00:00'), {
+                days: document.getElementById('days-1'),
+                hours: document.getElementById('hours-1'),
+                minutes: document.getElementById('minutes-1'),
+                seconds: document.getElementById('seconds-1'),
+                milliseconds: document.getElementById('milliseconds-1')
+            });
+    
+            updateCountdown(new Date('2024-06-07T17:00:00'), {
+                days: document.getElementById('days-2'),
+                hours: document.getElementById('hours-2'),
+                minutes: document.getElementById('minutes-2'),
+                seconds: document.getElementById('seconds-2'),
+                milliseconds: document.getElementById('milliseconds-2')
+            });
+    
+            const title = document.getElementById('countdown-title');
+            if (activeCountdown === 1) {
+                title.innerText = "Aftellen naar het einde van Tom's stage";
+            } else {
+                title.innerText = "Aftellen naar het einde van Ike's stage";
+            }
+        }, 10);
+    }
+    
+    function navigate(direction) {
+        const countdowns = document.querySelectorAll('.countdown-container');
+        countdowns[activeCountdown - 1].classList.remove('active');
+        activeCountdown = (activeCountdown + direction + countdowns.length - 1) % countdowns.length + 1;
+        countdowns[activeCountdown - 1].classList.add('active');
+    
+        const title = document.getElementById('countdown-title');
+        if (activeCountdown === 1) {
+            title.innerText = "Aftellen naar het einde van Tom's stage";
+        } else {
+            title.innerText = "Aftellen naar het einde van Ike's stage";
+        }
+    }
+    
 
-        // Add or remove class depending on checkbox status
+    excludeWeekendsCheckbox.addEventListener('change', () => {
+        startCountdown();
         if (excludeWeekendsCheckbox.checked) {
             document.body.classList.add('weekend-excluded');
         } else {
@@ -85,8 +125,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    interval = setInterval(updateCountdown, 10);
-    updateCountdown(); // Initial call to set the countdown immediately
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight') {
+            navigate(1);
+        } else if (event.key === 'ArrowLeft') {
+            navigate(-1);
+        }
+    });
+
+    document.getElementById    ('prev').addEventListener('click', () => navigate(-1));
+    document.getElementById('next').addEventListener('click', () => navigate(1));
+
+    // Initialize the first countdown as active
+    document.getElementById('countdown-1').classList.add('active');
+    startCountdown(); // Initial call to start the countdown immediately
 
     displayRandomQuote(); // Display a random quote when the page loads
 });
+
