@@ -128,7 +128,7 @@ label {
 
 @media (max-width: 600px) {
     .time-box {
-        width: 60px;
+        width: 85px;
         padding: 10px;
     }
     .time-box span {
