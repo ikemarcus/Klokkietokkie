@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title.innerText = "Aftellen naar het einde van Ike's stage";
             quoteContainer.style.display = 'none';
         } else {
-            title.innerText = "Aftellen naar het einde van Tim's stage";
+            title.innerText = "Aftellen naar het einde van Tim's carrière bij DigiMij :)";
             quoteContainer.style.display = 'none';
         }
     }
