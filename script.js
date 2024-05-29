@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 seconds: document.getElementById('seconds-1'),
                 milliseconds: document.getElementById('milliseconds-1')
             });
-    
+
             updateCountdown(new Date('2024-06-07T17:00:00'), {
                 days: document.getElementById('days-2'),
                 hours: document.getElementById('hours-2'),
@@ -91,30 +91,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 seconds: document.getElementById('seconds-2'),
                 milliseconds: document.getElementById('milliseconds-2')
             });
-    
-            const title = document.getElementById('countdown-title');
-            if (activeCountdown === 1) {
-                title.innerText = "Aftellen naar het einde van Tom's stage";
-            } else {
-                title.innerText = "Aftellen naar het einde van Ike's stage";
-            }
+
+            updateCountdown(new Date('2024-05-31T17:00:00'), {
+                days: document.getElementById('days-3'),
+                hours: document.getElementById('hours-3'),
+                minutes: document.getElementById('minutes-3'),
+                seconds: document.getElementById('seconds-3'),
+                milliseconds: document.getElementById('milliseconds-3')
+            });
+
         }, 10);
     }
-    
+
     function navigate(direction) {
         const countdowns = document.querySelectorAll('.countdown-container');
         countdowns[activeCountdown - 1].classList.remove('active');
         activeCountdown = (activeCountdown + direction + countdowns.length - 1) % countdowns.length + 1;
         countdowns[activeCountdown - 1].classList.add('active');
-    
+
         const title = document.getElementById('countdown-title');
         if (activeCountdown === 1) {
             title.innerText = "Aftellen naar het einde van Tom's stage";
-        } else {
+            quoteContainer.style.display = 'block';
+            displayRandomQuote();
+        } else if (activeCountdown === 2) {
             title.innerText = "Aftellen naar het einde van Ike's stage";
+            quoteContainer.style.display = 'none';
+        } else {
+            title.innerText = "Aftellen naar het einde van Tim's stage";
+            quoteContainer.style.display = 'none';
         }
     }
-    
 
     excludeWeekendsCheckbox.addEventListener('change', () => {
         startCountdown();
@@ -133,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.getElementById    ('prev').addEventListener('click', () => navigate(-1));
+    document.getElementById('prev').addEventListener('click', () => navigate(-1));
     document.getElementById('next').addEventListener('click', () => navigate(1));
 
     // Initialize the first countdown as active
@@ -142,4 +149,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     displayRandomQuote(); // Display a random quote when the page loads
 });
-
