@@ -65,9 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
             current.setDate(current.getDate() + 1);
         }
 
-        const remainingTime = end - new Date(current.setDate(current.getDate() - 1));
-        if (new Date(current).getDay() !== 0 && new Date(current).getDay() !== 6) {
-            totalMilliseconds += remainingTime;
+        // Adjust for the partial day if current is now past end
+        if (current > end) {
+            totalMilliseconds -= (current - end);
         }
 
         return totalMilliseconds;
